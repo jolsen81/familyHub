@@ -1,0 +1,30 @@
+services:
+  svc:
+    build:
+      context: ./svc
+#      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./svc:/app
+    command: npm run start
+    networks:
+      - app-network
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:5173"
+    volumes:
+      - ./web:/app
+    #    command: npm run dev  # Run Vite's dev server
+    networks:
+      - app-network
+    depends_on:
+      - svc
+
+networks:
+  app-network:
+    driver: bridge
