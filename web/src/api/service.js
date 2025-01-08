@@ -7,10 +7,10 @@ export const apiSlice = createApi({
         baseUrl: '/api', // Match the proxy setup in vite.config.js
     }),
     endpoints: (builder) => ({
-        getHello: builder.query({
-            query: () => '/hello', // This will translate to '/api/hello'
+        getUsers: builder.query({
+            query: () => '/users', // This will translate to '/api/hello'
         }),
     }),
 });
 
-export const { useGetHelloQuery } = apiSlice;
+export const { useGetUsersQuery } = apiSlice;
