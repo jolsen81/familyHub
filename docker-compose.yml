@@ -7,7 +7,18 @@ services:
       - "8080:8080"
     volumes:
       - ./svc:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://admin:password@mongo:27017/mydatabase?authSource=admin
+      - DB_USERNAME=admin
+      - DB_PASSWORD=password
+      - DB_PORT=27017
+      - DATABASE_NAME=mydatabase
+      - DATABASE_SERVER=mongo
     command: npm run start
+    depends_on:
+      - mongo
     networks:
       - app-network
 
@@ -19,11 +30,50 @@ services:
       - "3000:5173"
     volumes:
       - ./web:/app
+      - /app/node_modules
     #    command: npm run dev  # Run Vite's dev server
     networks:
       - app-network
     depends_on:
       - svc
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=mydatabase
+    volumes:
+      - ./data:/data/db
+    networks:
+      - app-network
+#    healthcheck:
+#      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+#      interval: 10s
+#      retries: 5
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+    networks:
+      - app-network
+    depends_on:
+      - mongo
+
+volumes:
+  data:
+
 
 networks:
   app-network:

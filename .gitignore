@@ -25,3 +25,6 @@ dist-ssr
 
 # Environemnt files
 .env
+
+# data storage
+data
