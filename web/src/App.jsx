@@ -1,11 +1,16 @@
-import './App.css'
-import Users from "./components/Users/index.js";
+import Hub from "./components/Hub";
+import {Box} from "@mui/material";
 
 function App() {
   return (
-        <>
-            <Users/>
-        </>
+        <Box
+            xs={{
+                height: '100%',
+                width: '100%'
+            }}
+        >
+            <Hub/>
+        </Box>
   )
 }
 
