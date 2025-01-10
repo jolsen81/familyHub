@@ -1,2 +1,1 @@
-import Users from "./Users.jsx"
-export default Users
+export { default as Users } from './Users.jsx'

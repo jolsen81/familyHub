@@ -1,2 +1,1 @@
-import Hub from "./Hub.jsx"
-export default Hub
+export { default as Hub } from './Hub.jsx'
