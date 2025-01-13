@@ -20,7 +20,28 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ['Users'],
         }),
+        deleteUser: builder.mutation({
+            query: ({id, ...body}) => ({
+                url: `/users/${id}`,
+                method: 'DELETE',
+                body
+            }),
+            invalidatesTags: ['Users'],
+        }),
+        updateUser: builder.mutation({
+            query: ({id, ...body}) => ({
+                url: `/users/${id}`,
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags: ['Users'],
+        }),
     }),
 });
 
-export const { useGetUsersQuery, useCreateUserMutation } = apiSlice;
+export const {
+    useGetUsersQuery,
+    useCreateUserMutation,
+    useDeleteUserMutation,
+    useUpdateUserMutation,
+} = apiSlice;
