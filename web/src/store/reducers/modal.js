@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 export const MODAL_TYPES = Object.freeze({
-    CREATE_USER: 'CREATE_USER'
+    CREATE_USER: 'CREATE_USER',
+    EDIT_USER: 'EDIT_USER',
 })
 
 const initialModalState = {
@@ -15,6 +16,7 @@ export const modalSlice = createSlice({
     reducers: {
         openModal: (state, data) => {
             const { payload } = data
+
             return {
                 open: true,
                 modalType: payload.modalType,

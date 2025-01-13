@@ -7,13 +7,7 @@ const PORT = process.env.PORT || 8080
 const baseRoutes = require('./routes/baseRoutes')
 const userRoutes = require('./routes/userRoutes')
 
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-    next();
-}
 
 app.use(cors())
 app.use(express.json())
